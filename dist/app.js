@@ -18,7 +18,9 @@ document.querySelector('#year').textContent = new Date().getFullYear();
 
 const demos = {
   zipotaso: { url: 'https://zipotaso.vercel.app', title: 'Zipotaso — menú digital de Zipote Food' },
-  'jose-store': { url: 'https://jose-store-sepia.vercel.app/Jose%20Store.dc.html', title: 'Jose Store — catálogo digital' }
+  'jose-store': { url: 'https://jose-store-sepia.vercel.app/Jose%20Store.dc.html', title: 'Jose Store — catálogo digital' },
+  zapateria: { url: 'demos/index.html?app=zapateria', title: 'Demo de gestión de zapatería' },
+  inventario: { url: 'demos/index.html?app=inventario', title: 'Demo de gestión de inventario' }
 };
 function closeDemo(id, restoreFocus = false) {
   document.querySelector(`#demo-${id}`).hidden = true;
@@ -37,6 +39,9 @@ document.querySelectorAll('.demo-toggle').forEach(button => {
       frame.src = demos[id].url;
       frame.title = demos[id].title;
       frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox');
+      if (id === 'zapateria' || id === 'inventario') {
+        frame.setAttribute('sandbox', frame.getAttribute('sandbox') + ' allow-top-navigation-by-user-activation');
+      }
       frame.referrerPolicy = 'strict-origin-when-cross-origin';
       panel.querySelector('.demo-frame').append(frame);
     }
