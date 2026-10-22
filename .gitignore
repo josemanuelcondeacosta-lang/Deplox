@@ -1,1 +1,5 @@
 .qa/
+.vercel/
+node_modules/
+.env
+.env.*
