@@ -12,11 +12,16 @@ menu.addEventListener('click', () => {
 });
 navigation.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
 document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && navigation.classList.contains('open')) { closeMenu(); menu.focus(); }
+  if (event.key === 'Escape' && navigation.classList.contains('open')) { closeMenu(); menu.focus({ preventScroll: true }); }
 });
+document.addEventListener('click', event => {
+  if (navigation.classList.contains('open') && !navigation.contains(event.target) && !menu.contains(event.target)) closeMenu();
+});
+window.matchMedia('(max-width: 760px)').addEventListener('change', closeMenu);
 document.querySelector('#year').textContent = new Date().getFullYear();
 
 const demos = {
+  adelantao: { url: 'https://adelantao-al-tiempo-beta.vercel.app/adelantao-inicio.dc.html', title: "Adelanta'o al Tiempo — tienda de calzado" },
   zipotaso: { url: 'https://zipotaso.vercel.app', title: 'Zipotaso — menú digital de Zipote Food' },
   'jose-store': { url: 'https://jose-store-sepia.vercel.app/Jose%20Store.dc.html', title: 'Jose Store — catálogo digital' },
   zapateria: { url: 'demos/index.html?app=zapateria', title: 'Demo de gestión de zapatería' },
@@ -54,3 +59,15 @@ document.querySelectorAll('.demo-toggle').forEach(button => {
 document.querySelectorAll('.demo-close').forEach(button => {
   button.addEventListener('click', () => closeDemo(button.dataset.close, true));
 });
+
+const revealItems = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('in'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  revealItems.forEach(item => observer.observe(item));
+} else {
+  revealItems.forEach(item => item.classList.add('in'));
+}
