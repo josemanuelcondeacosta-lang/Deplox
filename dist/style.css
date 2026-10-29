@@ -219,6 +219,7 @@ h1,h2,h3,p{margin:0}
 .process h3{margin:6px 0 6px;font-weight:800;font-size:18px;letter-spacing:-.02em}
 .process p:last-child{font-size:12px;line-height:1.7;color:var(--muted)}
 
+.founders{display:flex;flex-direction:column;gap:18px}
 .founder{display:flex;flex-direction:column;gap:18px;padding:26px;border-radius:var(--radius);background:#fff;border:1px solid var(--line)}
 .founder-head{display:flex;gap:16px;align-items:center}
 .founder-avatar{flex:none;width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:var(--brand);color:#fff;font-weight:800;font-size:20px;letter-spacing:-.03em}
